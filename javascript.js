@@ -44,17 +44,18 @@ function judge(playerSelection , computerSelection){
 let buttons = document.querySelectorAll('button');
 let result = document.querySelector('#status');
 let backgroud = document.querySelector('#winner-loser-draw');
-console.log(backgroud);
-console.log(result);
 buttons.forEach(btn => {
     btn.addEventListener('click',function(event){
         let playerSelection = btn.id;
         let computerSelection = getComputerChoice();
         let status = judge(playerSelection,computerSelection) ;
+        
         //clear backgorund
         backgroud.classList.remove('lose');
         backgroud.classList.remove('draw');
         backgroud.classList.remove('draw');
+
+        //add new backgroud
         if(status.search('Win') != -1){
             backgroud.classList.add('win');
         }
