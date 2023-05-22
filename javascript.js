@@ -1,4 +1,3 @@
-
 let array =['rock' , 'paper' , 'scissors'];
 
 function getComputerChoice(){
@@ -6,30 +5,13 @@ function getComputerChoice(){
 
     return computer; 
 }
-array.forEach(child => {
-    console.log(child)
-});
-for(let child of array){
-    console.log(child)
-}
-function Lcat(string){
-    return (string[0] == 'p')
-}
-
-let filterd = array.map(Lcat)
-
-filterd.forEach(element => {
-    console.log(element)
-});
-
 function judge(playerSelection , computerSelection){
     playerSelection = playerSelection.toLowerCase();
-    console.log(playerSelection)
     if(playerSelection == computerSelection){
         return 'Draw!';
     }
     let lose = 'You Lose! ';
-    let win = 'You win! ';
+    let win = 'You Win! ';
     if( playerSelection == 'rock'){
         if(computerSelection == 'paper'){
             return lose + computerSelection + ' beats ' + playerSelection;
@@ -56,5 +38,34 @@ function judge(playerSelection , computerSelection){
     }
 }
 
-let playerSelection = 'RocK';
-let computerSelection = getComputerChoice();
+
+// get what user clicked 
+
+let buttons = document.querySelectorAll('button');
+let result = document.querySelector('#status');
+let backgroud = document.querySelector('#winner-loser-draw');
+console.log(backgroud);
+console.log(result);
+buttons.forEach(btn => {
+    btn.addEventListener('click',function(event){
+        let playerSelection = btn.id;
+        let computerSelection = getComputerChoice();
+        let status = judge(playerSelection,computerSelection) ;
+        //clear backgorund
+        backgroud.classList.remove('lose');
+        backgroud.classList.remove('draw');
+        backgroud.classList.remove('draw');
+        if(status.search('Win') != -1){
+            backgroud.classList.add('win');
+        }
+        else if(status.search('Lose') != -1){
+            backgroud.classList.add('lose');
+        }
+        else{
+            backgroud.classList.add('draw');
+        }
+        result.textContent = status;
+    });
+        
+});
+
